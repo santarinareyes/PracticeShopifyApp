@@ -42,6 +42,14 @@ app.prepare().then(async () => {
         const host = ctx.query.host;
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
 
+        // Session tokens overview, https://shopify.dev/apps/auth/session-tokens
+        // This will set the cookies for our ctx
+        ctx.cookies.set("shopOrigin", shop, {
+          httpOnly: false,
+          secure: true,
+          sameSite: "none",
+        });
+
         const response = await Shopify.Webhooks.Registry.register({
           shop,
           accessToken,
