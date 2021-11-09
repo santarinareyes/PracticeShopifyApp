@@ -11,14 +11,20 @@ function handler() {
   const header = $("p.announcement-bar__message").parent();
 
   const createHeader = (data) => {
-    header.prepend(`<div>${data}</div>`).css({ backgroundColor: "orange" });
+    header.prepend(`<div>${data}</div>`).css({
+      backgroundColor: "orange",
+      textAlign: "center",
+      fontWeight: "bold",
+    });
   };
 
   fetch(
-    "https://cors-anywhere.herokuapp.com/https://42e4-188-149-211-205.ngrok.io/api/products?shop=samplestorerichard.myshopify.com"
+    "https://cors-anywhere.herokuapp.com/https://2d48-188-149-211-205.ngrok.io/api/products?shop=samplestorerichard.myshopify.com"
   )
     .then((res) => res.json())
     .then((data) => {
-      createHeader(data.data).catch((error) => console.log("error", error));
-    });
+      console.log("handler data", data);
+      //   createHeader(data.data).catch((error) => console.log("error", error));
+    })
+    .catch((error) => console.log("test-script.js handler()", error));
 }

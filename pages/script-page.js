@@ -38,7 +38,7 @@ const ScriptPage = () => {
                   variables: {
                     input: {
                       src:
-                        "https://42e4-188-149-211-205.ngrok.io/test-script.js",
+                        "https://2d48-188-149-211-205.ngrok.io/test-script.js",
                       displayScope: "ALL",
                     },
                   },

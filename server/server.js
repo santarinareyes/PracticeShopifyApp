@@ -6,6 +6,7 @@ import Shopify, { ApiVersion } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
+import koaBody from "koa-body";
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -94,11 +95,32 @@ app.prepare().then(async () => {
     }
   );
 
+  let products = [];
+
+  router.post("/api/products", koaBody(), async (ctx) => {
+    try {
+      const body = ctx.request.body;
+      products.push(body);
+      ctx.body = "Item added";
+    } catch (error) {
+      console.log("error", error);
+    }
+  });
+
+  router.delete("/api/products", koaBody(), async (ctx) => {
+    try {
+      products = [];
+      ctx.body = "Items cleared";
+    } catch (error) {
+      console.log("error", error);
+    }
+  });
+
   router.get("/api/products", async (ctx) => {
     try {
       ctx.body = {
         status: "success",
-        data: "This is from the Public API",
+        data: products,
       };
     } catch (error) {
       console.log(error);
