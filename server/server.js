@@ -94,6 +94,17 @@ app.prepare().then(async () => {
     }
   );
 
+  router.get("/api/products", async (ctx) => {
+    try {
+      ctx.body = {
+        status: "success",
+        data: "This is from the Public API",
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   router.get("(/_next/static/.*)", handleRequest); // Static content is clear
   router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
   router.get("(.*)", async (ctx) => {
